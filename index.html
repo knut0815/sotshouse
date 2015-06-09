@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
-<meta charset="utf-8">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Woningmarkt - SotS</title>
-
-<head>
+	<title>Woningmarkt - SotS</title>
 
 	<!-- ADD ALL SOTS HTML FRAGMENTS CSS HERE -->
-	<link rel="stylesheet" href="css/sots_style.css">
+	
+	<!-- D3.js -->
     <script src="http://d3js.org/d3.v3.min.js"></script>
 	<script src="http://d3js.org/topojson.v1.min.js"></script>
 	
+	<!-- jQuery -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -22,6 +22,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	
 	<!-- Needed for all -->
+	<link rel="stylesheet" href="css/sots_style.css">
 	<script src="js/sots_gemeentes_woningmarkt.js"></script>
 	<script src="js/sots_helperFunctions.js"></script>
 	<!-- Needed for Map NL -->
@@ -34,7 +35,6 @@
 	<!-- Needed for scatter plots -->
 	<script src="js/sots_bubbleLegend.js"></script>
 	<script src="js/sots_drawScatter.js"></script>
-
 
 </head>
 
@@ -56,7 +56,7 @@
 		</div>
 	</div>
 
-	<!-- Dummy separator -->
+	<!-- Graph separator -->
 	<hr>
 
 	<!-- SotS HTML WoningMarkt Scatterplot Section -->
@@ -72,8 +72,6 @@
 	</div>
 	
 	<!-- ADD ALL SOTS HTML FRAGMENTS JS HERE -->
-
-	<!-- Initiate the SVG and different g elements-->
 	<script src="js/sots_main.js"></script>
 
 </body>
