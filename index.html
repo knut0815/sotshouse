@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Woningmarkt - SotS</title>
+
+<head>
+
+	<!-- ADD ALL SOTS HTML FRAGMENTS CSS HERE -->
+	<link rel="stylesheet" href="css/sots_style.css">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="http://d3js.org/topojson.v1.min.js"></script>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	
+	<!-- Needed for all -->
+	<script src="js/sots_gemeentes_woningmarkt.js"></script>
+	<script src="js/sots_helperFunctions.js"></script>
+	<!-- Needed for Map NL -->
+	<script src="js/sots_gemeentes_geo.js"></script>
+	<script src="js/sots_drawMap.js"></script>
+	<script src="js/sots_drawCallout.js"></script>
+	<!-- Needed for Treemaps -->
+	<script src="js/sots_treemap_provincies.js"></script>
+	<script src="js/sots_drawTree.js"></script>
+	<!-- Needed for scatter plots -->
+	<script src="js/sots_bubbleLegend.js"></script>
+	<script src="js/sots_drawScatter.js"></script>
+
+
+</head>
+
+<body>
+
+	<!-- SotS HTML WoningMarkt Map Section -->
+	<div class = "sotsVisualWrapper">
+		<div id="cont" class="container-fluid">
+			<div class="row text-center">
+				<div class="col-md-6 column text-center">
+					<h4 style="color: #3B3B3B; padding-bottom: 10px;">Percentage van verwachte groei in aantal huishoudens tot 2030 dat kan worden opgevuld door transformatie van leegstaande kantoorgebouwen</h4>
+					<div class="dataresource map"></div>
+				</div>
+				<div class="col-md-6 column text-center">
+					<h4 style="color: #3B3B3B; padding-bottom: 10px;">Aantal m<sup>2</sup> in leegstaande kantoren met transformatie potentie per Gemeente | Gegroepeerd per Provincie</h4>
+					<div class="dataresource treemap potentie"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Dummy separator -->
+	<hr>
+
+	<!-- SotS HTML WoningMarkt Scatterplot Section -->
+	<div class = "sotsVisualWrapper">
+		<div id="cont" class="container-fluid">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 column text-center">
+					<h4 style="color: #3B3B3B; padding-bottom: 10px;">Per gemeente | De m<sup>2</sup> beschikbaar in kantoorgebouwen met transformatie potentie versus de totale leegstand van kantoren</h4>
+					<div class="dataresource scatter"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- ADD ALL SOTS HTML FRAGMENTS JS HERE -->
+
+	<!-- Initiate the SVG and different g elements-->
+	<script src="js/sots_main.js"></script>
+
+</body>
+</html>
+ 
