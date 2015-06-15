@@ -11,7 +11,24 @@ var numFormatThree = d3.format(".3f"),
 	numFormatPercentDec = d3.format(".1%"),
 	numFormatCurrency = d3.format("$,"),
 	numFormatThousands = d3.format("0,000");
+
+var NL = d3.locale({ 
+	decimal: ",", 
+	thousands: ".", 
+	grouping: [3], 
+	currency: ["", " €"], 
+	dateTime: "%A, %e de %B de %Y, %X", 
+	date: "%d/%m/%Y", 
+	time: "%H:%M:%S", 
+	periods: ["AM", "PM"], 
+	days: ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag","zondag"], 
+	shortDays: ["ma", "di", "woe", "do", "vrij", "za", "zon"], 
+	months: ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "october", "november", "december"], 
+	shortMonths: ["jan", "feb", "maa", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"] 
+	}); 
 	
+var NLformat = NL.numberFormat("n");
+		
 // Function to check if the variable is a function or not
 function isFunction(functionToCheck) {
 	var getType = {};

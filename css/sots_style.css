@@ -55,22 +55,6 @@
 	text-anchor: start;
 	font-size: 10px;
 }
-
-.chordText {
-	font-size: 10px;
-}
-
-.solidArc:hover {
-  fill: #00A1DE ;
-}
-
-.solidArc {
-	-moz-transition: all 0.2s;
-	-o-transition: all 0.2s;
-	-webkit-transition: all 0.2s;
-	transition: all 0.2s;
-}
-
 .voronoi path {
   fill: none;
   pointer-events: all;
@@ -80,8 +64,12 @@
 	pointer-events: none;
 }
 
-.trendline {
-	stroke: #D1D1D1;
-	stroke-width: 1.5;
-	pointer-events: none;
+.backgroundLine {
+	stroke: #E0E0E0;
+	shape-rendering: crispEdges;
+}
+
+.connectLine {
+	stroke: #666666;
+	shape-rendering: crispEdges;
 }

@@ -25,10 +25,10 @@ function drawMap(mapWrapper, colorScale, colorVar, mapTitle, width, height) {
 		.style("stroke-width", 1)
 		.style("stroke", "white")
 		.style("fill", function(d) {		
-			if (GM_CODES[d.properties.GM_CODE] === undefined) return "#DCDCDC";
-			
 			var value = eval("gemeentes[GM_CODES[d.properties.GM_CODE]]." + colorVar);
-			if (value < 0) return "#8C8C8C"
+			
+			if (gemeentes[GM_CODES[d.properties.GM_CODE]].NVM === "NO") return "#E8E8E8";
+			else if (value < 0) return "#8C8C8C"
 			else return colorScale(value);
 		})
 		.on("mouseover", fadeIn)
@@ -85,7 +85,7 @@ function createMapLegend(wrapper, width, height, title) {
 		  
 	//Create container per rect/text pair  
 	var colorLegend = wrapper.selectAll('.scatterLegendSquare')  	
-			  .data(['#bdd203','#8abc0c','#61a421','#3c8a2e',"#8C8C8C","#DCDCDC"])                              
+			  .data(['#bdd203','#8abc0c','#61a421','#3c8a2e',"#8C8C8C","#E8E8E8"])                              
 			  .enter().append('g')   
 			  .attr('class', 'scatterLegendSquare') 
 			  .attr('width', 100)

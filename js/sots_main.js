@@ -28,8 +28,8 @@ var mapLegendWrapper = svgMap.append("g").attr("class", "legend");
 /////////////////////////// Initiate Tree Maps  ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 var treeMargin = {left: 50, top: 50, right: 40, bottom: 60},
-	treeWidth = Math.min($(".dataresource.treemap.potentie").width(),500) - treeMargin.left - treeMargin.right,
-	treeHeight = mapHeight - (treeMargin.top - mapMargin.top);
+	treeWidth = Math.min($(".dataresource.treemap.potentie").width(),700) - treeMargin.left - treeMargin.right,
+	treeHeight = mapHeight + 50 - (treeMargin.top - mapMargin.top);
 	
 //Potentie
 var svgTreePotentie = d3.select(".dataresource.treemap.potentie").append("svg")
@@ -46,9 +46,9 @@ var treeLegendWrapperPotentie = svgTreePotentie.append("g").attr("class", "legen
 ///////////////////////////////////////////////////////////////////////////
 //////////////////////// Initiate Scatter plot  ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-var scatterMargin = {left: 70, top: 40, right: 40, bottom: 60},
-	scatterWidth = Math.min($(".dataresource.scatter").width(),700) - scatterMargin.left - scatterMargin.right,
-	scatterHeight = scatterWidth*3/5;
+var scatterMargin = {left: 40, top: 20, right: 40, bottom: 80},
+	scatterWidth = $(".dataresource.scatter").width() - scatterMargin.left - scatterMargin.right,
+	scatterHeight = Math.min(scatterWidth, 700);
 	
 //Potentie
 var svgScatter = d3.select(".dataresource.scatter").append("svg")
@@ -63,14 +63,14 @@ var scatterChart = svgScatter.append("g")
 ///////////////////// Initiate global variables ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
-var GM_CODES = [];
+var GM_CODES = [],
+	allGemeentes = [],
+	GM_NAMES = [];
 gemeentes.forEach(function(d,i) {
 			GM_CODES[d.GM_CODE] = i;
+			allGemeentes[i] = d.GM_NAAM;
+			GM_NAMES[d.GM_NAAM] = d.GM_CODE;
 });
-
-//Green color palette for Map
-//var colorGreen = paletteGreen(d3.min(gemeentes, function(d) { return d.perc_groei_trans; }), 
-//							  d3.max(gemeentes, function(d) { return d.perc_groei_trans; }));
 
 var colorGreen = d3.scale.threshold()
 			.range(['#bdd203','#8abc0c','#61a421','#3c8a2e'])
@@ -87,61 +87,211 @@ drawMap(mapWrapper = map, colorScale = colorGreen, colorVar = "perc_groei_trans"
 createMapLegend(mapLegendWrapper, mapWidth, mapHeight, "% dat kan voldoen aan de huisvraag door transformatie")
 
 //Initiate the call out
-drawCallout(calloutWrapper = mapCallout, topText = "Groei aan woningen tot 2030", bottomText = "Nieuwe woningen door transformatie");
+drawCallout(calloutWrapper = mapCallout, topText = "Groei aan woningen tot 2025", bottomText = "Nieuwe woningen door transformatie");
+
+////////////// Create the search box //////////////////
+
+//Create new options
+var options = allGemeentes;
+var select = document.getElementById("searchBoxMapNL"); 
+//Put new options into select box
+for(var i = 0; i < options.length; i++) {
+	var opt = options[i];
+	var el = document.createElement("option");
+	el.textContent = opt;
+	el.value = opt;
+	select.appendChild(el);
+}
+//Create combo box
+$('.combobox').combobox();
+
+
+//////////////////// Treemap //////////////////////
 
 //Draw the Potentie treeMap
 drawTree(wrapper = svgTreePotentie, subwrapper = treeMapChartPotentie, colorScale = colorGreen, width = treeWidth, 
-		 height = treeHeight, margin = treeMargin, sizeVar = "potentie", colorVar = "perc_groei_trans", title = "");
+		 height = treeHeight, margin = treeMargin, sizeVar = "potentie_leegstand_m2", colorVar = "perc_groei_trans", title = "");
 	
+//////////////////// Connected scatterplot //////////////////////
+
 //Draw the scatterplot	
-initiateScatter(scatterWidth, scatterHeight, scatterMargin);
+initiateScatter(gemeentesPlanning, scatterWidth, scatterHeight, scatterMargin);
 
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////// Initiate Scatterplot visual /////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
-function initiateScatter(width, height, margin) {
+function initiateScatter(data, width, height, margin) {
 
-	var data = gemeentes.filter(function(d) { return d.behoefte_woningen > 0 & d.leegstand_m2 > 1000 & d.potentie_m2 > 1000; });
+	var moveToRight = 130,
+		barChartWidth = 130;
+	
+	//////////////////////////////////////////////////////
+	/////////////////// Initialize Axes //////////////////
+	//////////////////////////////////////////////////////
 	
 	//Set the new x axis range
-	var xScale = d3.scale.log()
-		.range([0, width])
-		.domain([1001, d3.max(data, function(d) {return d.leegstand_m2;})])
-		.nice();
+	var xScale = d3.scale.linear()
+		.range([moveToRight, width-barChartWidth])
+		//.domain(d3.extent(data, function(d) {return d.perc_total;}))
+		.domain([0,2.75]);
+		
+	//Set new x-axis	
+	var xAxis = d3.svg.axis()
+		.orient("bottom")
+		.ticks(6)
+		.scale(xScale)
+		.tickFormat(numFormatPercent);	
 
-	//Set the new y axis range
-	var yScale = d3.scale.log()
-		.range([height,0])
-		.domain([1001, d3.max(data, function(d) {return d.potentie_m2;})])
+	//Append the x-axis
+	scatterChart.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(" + 0 + "," + (height + 25) + ")")
+		.call(xAxis);
+
+	//Set the new x axis range
+	var yScale = d3.scale.linear()
+		.range([height, 0])
+		.domain([0, data.length])
 		.nice();
-	
+		
 	//Set the scale for the bubble size
 	var rScale = d3.scale.sqrt()
 		.range([0, 20])
-		.domain([0, d3.max(data, function(d) {return d.behoefte_woningen;})]);
+		.domain([0, d3.max(data, function(d) {return d.houses_need;})]);		
+
+	////////////////////////////////////////////////////////////	
+	//////////////////// Connecting Lines //////////////////////
+	////////////////////////////////////////////////////////////					
+
+	//Lines behind the entire chart width
+	scatterChart.selectAll(".backgroundLine")
+			.data(data)
+			.enter().append("line")
+				.attr("class", "backgroundLine")
+				.style("opacity", 0.4)
+				.attr("x1", xScale.range()[0])
+				.attr("x2", xScale.range()[1])
+				.attr("y1", function(d, i) {return yScale(i);})
+				.attr("y2", function(d, i) {return yScale(i);});
+				
+	//Lines connecting the two circles
+	scatterChart.selectAll(".connectLine")
+			.data(data)
+			.enter().append("line")
+				.attr("class", "connectLine")
+				.style("opacity", 0.6)
+				.attr("x1", function(d) {return xScale(d.perc_planning) + 5;})
+				.attr("x2", function(d) {return xScale(d.perc_total) - 5;})
+				.attr("y1", function(d, i) {return yScale(i);})
+				.attr("y2", function(d, i) {return yScale(i);});
+				
+	////////////////////////////////////////////////////////////	
+	/////////////////// Scatterplot Circles ////////////////////
+	////////////////////////////////////////////////////////////					
+				
+	//Planning circles
+	scatterChart.selectAll(".circleScatter.planning")
+			.data(data)
+			.enter().append("circle")
+				.attr("class", function(d) { return "circleScatter planning " + d.GM_CODE; })
+				.style("opacity", 0.8)
+				.style("fill", "#8C8C8C")
+				.attr("cx", function(d) {return xScale(d.perc_planning);})
+				.attr("cy", function(d, i) {return yScale(i);})
+				.attr("r", 5);
+				//.attr("r", function(d) {return rScale();});
+
+	//Planning+transformation circles
+	scatterChart.selectAll(".circleScatter.total")
+			.data(data)
+			.enter().append("circle")
+				.attr("class", function(d) { return "circleScatter total " + d.GM_CODE; })
+				.style("opacity", 0.8)
+				.style("fill", "#81BC00")
+				.attr("cx", function(d) {return xScale(d.perc_total);})
+				.attr("cy", function(d, i) {return yScale(i);})
+				.attr("r", 5);
+				//.attr("r", function(d) {return rScale();});
+
+	////////////////////////////////////////////////////////////	
+	//////////////////// Scatterplot Labels ////////////////////
+	////////////////////////////////////////////////////////////	
+
+	//Names of the cities
+	scatterChart.selectAll(".legendTitle")
+			.data(data)
+			.enter().append("text")
+				.attr("class", "legendTitle")
+				.style("text-anchor", "end")	
+				.style("font-size", "12px")
+				.attr("x", xScale(0) - 10)
+				.attr("y", function(d, i) {return yScale(i);})
+				.attr("dy", "0.35em")
+				.text(function(d) { return d.GM_NAAM; });
+
+	////////////////////////////////////////////////////////////	
+	////////////////// Bar chart at the right //////////////////
+	////////////////////////////////////////////////////////////	
+
+	var barStart = width - barChartWidth + 20,
+		barHeight = Math.round(height/data.length * 0.7);
+		
+	//Set the bar scale
+	var barScale = d3.scale.linear()
+		.range([0, barChartWidth])
+		//.domain(d3.extent(data, function(d) {return d.houses_need;}));
+		.domain([0,40000]);
+
+	//Create the bar scale axis	
+	var barAxis = d3.svg.axis()
+		.orient("bottom")
+		.ticks(2)
+		.scale(barScale)
+		.tickFormat(NLformat);	
+
+	//Append the bar scale axis
+	scatterChart.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(" + barStart + "," + (height + 25) + ")")
+		.call(barAxis);
 	
-	// Create gemeente scatter plot
-	drawScatter(data = data, wrapper = scatterChart, 
-			width = width, height = height, margin = margin,
-			xScale = xScale, yScale = yScale, rScale = rScale,
-			xVar = "leegstand_m2", yVar = "potentie_m2", rVar = "behoefte_woningen", 
-			colorVar = "#81BC00", 
-			chartTitle = "", xLabel = "Leegstand van kantoren [m2]", yLabelTop = "Transformatie potentie", yLabelBottom = "[m2]");
+	//Create the bars themselves
+	scatterChart.selectAll(".scatterBar")
+			.data(data)
+			.enter().append("rect")
+				.attr("class", "scatterBar")
+				.attr("x", barStart)
+				.attr("y", function(d, i) {return yScale(i) - barHeight/2;})
+				.attr("width", function(d) { return barScale(d.houses_need); })
+				.attr("height", barHeight)
+				.style("fill", "#DCDCDC");
 	
+	//////////////////////////////////////////////////////
+	////////////// Initialize Axis Texts /////////////////
+	//////////////////////////////////////////////////////	
 	
-	/*
+	//Set up X axis label
+	scatterChart.append("g")
+		.append("text")
+		.attr("class", "x axis label")
+		.attr("text-anchor", "middle")
+		.attr("transform", "translate(" + (moveToRight + (width-moveToRight-barChartWidth)/2) + "," + (height + 60) + ")")
+		.style("font-size", "10px")
+		.text("Percentage van behoefte aan woningen tot 2025");
+		
 	//Create the g group to hold the data
 	var medianLine = scatterChart.append("g").attr("class", "median")
-		//.attr("transform", "translate(" + 0 + "," + yScale(avgs) + ")")
 		.style("cursor", "default");
 	//The line itself
 	medianLine.append("line")
-		.attr("x1", xScale.range()[0])
-		.attr("x2",  xScale.range()[1])
-		.attr("y1", yScale(xScale.domain()[0]))
-		.attr("y2", yScale(xScale.domain()[1]))
+		.attr("x1", xScale(1))
+		.attr("x2",  xScale(1))
+		.attr("y1", yScale(data.length-1) - 15)
+		.attr("y2", yScale(0) + 15)
 		.style("stroke", "#B5B5B5")
+		.style("shape-rendering", "crispEdges")
+		.style("stroke-dasharray", "2 2")
 		.style("pointer-events", "none");	
 	//The word above the line
 	//medianLine.append("text")
@@ -149,47 +299,82 @@ function initiateScatter(width, height, margin) {
 	//	.attr("transform", "translate(" + (5) + "," + (8) + ")")
 	//	.style("text-anchor", "start")
 	//	.text("Gemiddelde");	
-	*/
-	
+
+	//Set up bar chart axis label
+	scatterChart.append("g")
+		.append("text")
+		.attr("class", "bar chart label")
+		.attr("text-anchor", "middle")
+		.attr("transform", "translate(" + (barStart + barChartWidth/2) + "," + (height + 60) + ")")
+		.style("font-size", "10px")
+		.text("Benodigde woningen tot 2025");
+		
 	//////////////////////////////////////////////////////
 	///////////////// Initialize Legend //////////////////
 	//////////////////////////////////////////////////////
-
-	var legend = scatterChart.append("g").attr("class", "legendWrapper")
-					.attr("transform", "translate(" + (scatterWidth - 30) + "," + (scatterHeight - 60) +")");
-					
-	bubbleLegend(legend, rScale, legendSizes = [15000, 5000, 500], legendName = "De groei in huishoudens");	
-
-
+	
 	//Create a wrapper for the circle legend				
 	var legendCircle = scatterChart.append("g").attr("class", "legendWrapper")
-					.attr("transform", "translate(" + (scatterWidth - 130) + "," + (scatterHeight - 60) +")");
+					.attr("transform", "translate(" + (moveToRight + (width-moveToRight-barChartWidth)/2) + "," + (scatterMargin.top/2) +")");
 	
+	//The grey circle
 	legendCircle.append("text")
 		.attr("class","legendTitle")
-		.attr("transform", "translate(" + 0 + "," + -25 + ")")
-		.attr("x", 0 + "px")
-		.attr("y", 0 + "px")
-		.attr("dy", "1em")
-		.text("Elke cirkel is een gemeente")
-		.call(wrap, 80);
+		.attr("x", -110)
+		.attr("y", 0)
+		.attr("dy", "0.35em")
+		.style("text-anchor", "start")
+		.text("Plancapaciteit");
 	legendCircle.append("circle")
-        .attr('r', rScale(5000))
-        .attr('class',"legendCircle")
-        .attr('cx', 0)
-        .attr('cy', rScale(5000) + 7);	
+        .attr('r', 5)
+        .attr('cx', -120)
+        .attr('cy', 0)
+		.style("opacity", 0.8)
+		.style("fill", "#8C8C8C");	
+
+	//The green circle
+	legendCircle.append("text")
+		.attr("class","legendTitle")
+		.attr("x", 30)
+		.attr("y", 0)
+		.attr("dy", "0.35em")
+		.style("text-anchor", "start")
+		.text("Plan- + Transformatiecapaciteit");
+	legendCircle.append("circle")
+        .attr('r', 5)
+        .attr('cx', 20)
+        .attr('cy', 0)
+		.style("opacity", 0.8)
+		.style("fill", "#81BC00");			
 	
 }//initiateScatter
 
 ///////////////////////////////////////////////////////////////////////////
-///////////// Initiate global functions to Woningmarkt ////////////////////
+//////////////////// Hover and Search functions ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////
+
+function searchEventMapNL(chosen) {
+				
+	//If the chosen county is not equal to the default, find that name and highlight it - mouseover function
+	if (chosen != "") {
+		fadeIn(chosen);
+	} else {
+		fadeOut();
+	}//else
+	
+}//searchEventMapNL
 
 //Function on mouseover of gemeente
 function fadeIn(d) {
 
 	//The location of GM_CODE differs per dataset, check where the mouse over happens; map or plot
-	if(hasClass(d3.select(this), "cell")) var chosen = d;
+	if (typeof(d) === "string") { 
+		var chosen = {
+				GM_NAAM: d,
+				GM_CODE: GM_NAMES[d]
+			};
+	}
+	else if(hasClass(d3.select(this), "cell")) var chosen = d;
 	else var chosen = d.properties;
 
 	//Highlight the chosen gemeente in other plots
@@ -215,8 +400,8 @@ function fadeIn(d) {
 		mapCallout.selectAll("#callout_top").text("-");
 		mapCallout.selectAll("#callout_bottom").text("-");
 	} else {
-		mapCallout.selectAll("#callout_top").text(Math.round(gemeentes[GM_CODES[chosen.GM_CODE]].behoefte_woningen/10,0)*10);
-		mapCallout.selectAll("#callout_bottom").text(Math.round(gemeentes[GM_CODES[chosen.GM_CODE]].kantoren_woningen/10,0)*10);
+		mapCallout.selectAll("#callout_top").text(NLformat(Math.round(gemeentes[GM_CODES[chosen.GM_CODE]].behoefte_woningen/10,0)*10));
+		mapCallout.selectAll("#callout_bottom").text(NLformat(Math.round(gemeentes[GM_CODES[chosen.GM_CODE]].kantoren_woningen/10,0)*10));
 	}//else
 	mapCallout.style("visibility", "visible");
 	

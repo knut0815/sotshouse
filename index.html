@@ -20,6 +20,11 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+	<!-- Combobox script for the search box -->
+	<script src="js/bootstrap-combobox.js"></script>
+	<link href="css/bootstrap-combobox.css" type="text/css" rel="stylesheet">
+	
 	
 	<!-- Needed for all -->
 	<link rel="stylesheet" href="css/sots_style.css">
@@ -33,8 +38,7 @@
 	<script src="js/sots_treemap_provincies.js"></script>
 	<script src="js/sots_drawTree.js"></script>
 	<!-- Needed for scatter plots -->
-	<script src="js/sots_bubbleLegend.js"></script>
-	<script src="js/sots_drawScatter.js"></script>
+	<script src="js/sots_gemeentes_planning.js"></script>
 
 </head>
 
@@ -44,14 +48,28 @@
 	<div class = "sotsVisualWrapper">
 		<div id="cont" class="container-fluid">
 			<div class="row text-center">
+
 				<div class="col-md-6 column text-center">
-					<h4 style="color: #3B3B3B; padding-bottom: 10px;">Percentage van verwachte groei in aantal huishoudens tot 2030 dat kan worden opgevuld door transformatie van leegstaande kantoorgebouwen</h4>
-					<div class="dataresource map"></div>
+					<div class="row">
+						<h4 style="color: #3B3B3B; padding-bottom: 10px;">Percentage van verwachte groei in aantal huishoudens tot 2025 dat kan worden opgevuld door transformatie van leegstaande kantoorgebouwen</h4>
+						<div class="col-md-12 column"><div class="dataresource map"></div></div>
+					</div>
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-2 column">
+							 <div class="form-group">			
+								<select id="searchBoxMapNL" class="combobox input-large form-control" style="display: none;" onchange="searchEventMapNL(this.value)">
+								  <option value="" selected="selected">Zoek gemeente...</option>
+								</select>
+							  </div>
+						</div>
+					</div>
 				</div>
+				
 				<div class="col-md-6 column text-center">
 					<h4 style="color: #3B3B3B; padding-bottom: 10px;">Aantal m<sup>2</sup> in leegstaande kantoren met transformatie potentie per Gemeente | Gegroepeerd per Provincie</h4>
 					<div class="dataresource treemap potentie"></div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -63,8 +81,9 @@
 	<div class = "sotsVisualWrapper">
 		<div id="cont" class="container-fluid">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2 column text-center">
-					<h4 style="color: #3B3B3B; padding-bottom: 10px;">Per gemeente | De m<sup>2</sup> beschikbaar in kantoorgebouwen met transformatie potentie versus de totale leegstand van kantoren</h4>
+				<div class="col-md-10 col-md-offset-1 column text-center">
+					<h4 style="color: #3B3B3B;">Plancapaciteit en transformatie potentie...</h4>
+					<div style="color: #6E6E6E; font-size: 14px;">Voor de 27 steden met de hoogste m<sup>2</sup> aan transformatie potentie</div>
 					<div class="dataresource scatter"></div>
 				</div>
 			</div>

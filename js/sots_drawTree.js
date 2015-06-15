@@ -143,11 +143,11 @@ function zoom(d, event) {
 	//First make the map as it used to be
 	map.selectAll("path")
 		.style("fill", function(d) { 	
-			if (GM_CODES[d.properties.GM_CODE] === undefined) return "#DCDCDC";
+			var value = eval("gemeentes[GM_CODES[d.properties.GM_CODE]]." + colorVar);
 			
-			var value = gemeentes[GM_CODES[d.properties.GM_CODE]].perc_groei_trans;
-			if (value < 0) return "#8C8C8C"
-			else return colorGreen(value);
+			if (gemeentes[GM_CODES[d.properties.GM_CODE]].NVM === "NO") return "#E8E8E8";
+			else if (value < 0) return "#8C8C8C"
+			else return colorScale(value);
 		});
 	//Then set all cities which are not undefined but also do not belong to the clicked province to a dark grey
 	if (zoomLevel != "Nederland") {

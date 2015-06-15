@@ -29,13 +29,15 @@ function drawCallout(calloutWrapper, topText, bottomText) {
 	calloutWrapper.append("text")
 		.attr("class", "callout")
 		.attr("id", "callout_top")
-		.attr("transform", "translate(" + (callOutNumbers) + "," + (35) + ")")
+		.attr("transform", "translate(" + (callOutNumbers+25) + "," + (35) + ")")
+		.style("text-anchor", "end")
 		.text("346");
 		
 	calloutWrapper.append("text")
 		.attr("class", "callout")
 		.attr("id", "callout_bottom")
-		.attr("transform", "translate(" + (callOutNumbers) + "," + (50) + ")")
+		.attr("transform", "translate(" + (callOutNumbers+25) + "," + (50) + ")")
+		.style("text-anchor", "end")
 		.text("3467");
 		
 	calloutWrapper.append("line")
@@ -44,7 +46,7 @@ function drawCallout(calloutWrapper, topText, bottomText) {
 		.style("stroke", "#D1D1D1")
 		.style("shape-rendering", "crispEdges")
 		.attr("x1", 0)
-		.attr("x2", callOutNumbers*1.1)
+		.attr("x2", callOutNumbers*1.2)
 		.attr("y1", 17)
 		.attr("y2", 17);	
 }//function drawCallout
