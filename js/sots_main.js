@@ -48,8 +48,8 @@ var treeLegendWrapperPotentie = svgTreePotentie.append("g").attr("class", "legen
 ///////////////////////////////////////////////////////////////////////////
 var scatterMargin = {left: 40, top: 20, right: 40, bottom: 80},
 	scatterWidth = $(".dataresource.scatter").width() - scatterMargin.left - scatterMargin.right,
-	scatterHeight = Math.min(scatterWidth, 700);
-	
+	scatterHeight = Math.min(700, Math.max(500, $(window).height() - 140)) - scatterMargin.top - scatterMargin.bottom;
+
 //Potentie
 var svgScatter = d3.select(".dataresource.scatter").append("svg")
 		.attr("width", (scatterWidth + scatterMargin.left + scatterMargin.right))
@@ -114,9 +114,45 @@ drawTree(wrapper = svgTreePotentie, subwrapper = treeMapChartPotentie, colorScal
 	
 //////////////////// Connected scatterplot //////////////////////
 
+
+//Set the new x axis range
+var yScaleScatter = d3.scale.linear()
+	.range([scatterHeight, 0])
+	.domain([0, gemeentesPlanning.length])
+	.nice();
+	
+//Groups for each row
+var scatterElement = scatterChart.selectAll(".wrappingElement")
+			.data(gemeentesPlanning)
+			.enter().append("g")
+				.attr("class", "wrappingElement")
+				.attr("transform", function(d, i) {return "translate(0," + yScaleScatter(i) + ")" ;});
+
+//When you click the buttons
+d3.select("#totalButton").on("click", function(d){ 
+		scatterChart.selectAll(".wrappingElement")
+				.transition().duration(1000)
+				.attr("transform", function(d, i) {return "translate(0," + yScaleScatter(d.orderTotal - 1) + ")" ;})
+});
+d3.select("#transButton").on("click", function(d){ 
+		scatterChart.selectAll(".wrappingElement")
+				.transition().duration(1000)
+				.attr("transform", function(d, i) {return "translate(0," + yScaleScatter(d.orderTrans - 1) + ")" ;})
+});
+d3.select("#planButton").on("click", function(d){ 
+		scatterChart.selectAll(".wrappingElement")
+				.transition().duration(1000)
+				.attr("transform", function(d, i) {return "translate(0," + yScaleScatter(d.orderPlan - 1) + ")" ;})
+});
+d3.select("#housesButton").on("click", function(d){ 
+		scatterChart.selectAll(".wrappingElement")
+				.transition().duration(1000)
+				.attr("transform", function(d, i) { return "translate(0," + yScaleScatter(d.orderHouses - 1) + ")" ;})
+});
+
 //Draw the scatterplot	
 initiateScatter(gemeentesPlanning, scatterWidth, scatterHeight, scatterMargin);
-
+	
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////// Initiate Scatterplot visual /////////////////////////
 ///////////////////////////////////////////////////////////////////////////
@@ -124,7 +160,7 @@ initiateScatter(gemeentesPlanning, scatterWidth, scatterHeight, scatterMargin);
 function initiateScatter(data, width, height, margin) {
 
 	var moveToRight = 130,
-		barChartWidth = 130;
+		barChartWidth = Math.max(130, width*0.25);
 	
 	//////////////////////////////////////////////////////
 	/////////////////// Initialize Axes //////////////////
@@ -148,69 +184,55 @@ function initiateScatter(data, width, height, margin) {
 		.attr("class", "x axis")
 		.attr("transform", "translate(" + 0 + "," + (height + 25) + ")")
 		.call(xAxis);
-
-	//Set the new x axis range
-	var yScale = d3.scale.linear()
-		.range([height, 0])
-		.domain([0, data.length])
-		.nice();
 		
 	//Set the scale for the bubble size
 	var rScale = d3.scale.sqrt()
 		.range([0, 20])
 		.domain([0, d3.max(data, function(d) {return d.houses_need;})]);		
-
+				
 	////////////////////////////////////////////////////////////	
 	//////////////////// Connecting Lines //////////////////////
 	////////////////////////////////////////////////////////////					
 
 	//Lines behind the entire chart width
-	scatterChart.selectAll(".backgroundLine")
-			.data(data)
-			.enter().append("line")
+	scatterElement.append("line")
 				.attr("class", "backgroundLine")
 				.style("opacity", 0.4)
 				.attr("x1", xScale.range()[0])
 				.attr("x2", xScale.range()[1])
-				.attr("y1", function(d, i) {return yScale(i);})
-				.attr("y2", function(d, i) {return yScale(i);});
+				.attr("y1", 0)
+				.attr("y2", 0);
 				
 	//Lines connecting the two circles
-	scatterChart.selectAll(".connectLine")
-			.data(data)
-			.enter().append("line")
+	scatterElement.append("line")
 				.attr("class", "connectLine")
 				.style("opacity", 0.6)
 				.attr("x1", function(d) {return xScale(d.perc_planning) + 5;})
 				.attr("x2", function(d) {return xScale(d.perc_total) - 5;})
-				.attr("y1", function(d, i) {return yScale(i);})
-				.attr("y2", function(d, i) {return yScale(i);});
+				.attr("y1", 0)
+				.attr("y2", 0);
 				
 	////////////////////////////////////////////////////////////	
 	/////////////////// Scatterplot Circles ////////////////////
 	////////////////////////////////////////////////////////////					
 				
 	//Planning circles
-	scatterChart.selectAll(".circleScatter.planning")
-			.data(data)
-			.enter().append("circle")
+	scatterElement.append("circle")
 				.attr("class", function(d) { return "circleScatter planning " + d.GM_CODE; })
 				.style("opacity", 0.8)
 				.style("fill", "#8C8C8C")
 				.attr("cx", function(d) {return xScale(d.perc_planning);})
-				.attr("cy", function(d, i) {return yScale(i);})
+				.attr("cy", 0)
 				.attr("r", 5);
 				//.attr("r", function(d) {return rScale();});
 
 	//Planning+transformation circles
-	scatterChart.selectAll(".circleScatter.total")
-			.data(data)
-			.enter().append("circle")
+	scatterElement.append("circle")
 				.attr("class", function(d) { return "circleScatter total " + d.GM_CODE; })
 				.style("opacity", 0.8)
 				.style("fill", "#81BC00")
 				.attr("cx", function(d) {return xScale(d.perc_total);})
-				.attr("cy", function(d, i) {return yScale(i);})
+				.attr("cy", 0)
 				.attr("r", 5);
 				//.attr("r", function(d) {return rScale();});
 
@@ -219,14 +241,12 @@ function initiateScatter(data, width, height, margin) {
 	////////////////////////////////////////////////////////////	
 
 	//Names of the cities
-	scatterChart.selectAll(".legendTitle")
-			.data(data)
-			.enter().append("text")
+	scatterElement.append("text")
 				.attr("class", "legendTitle")
 				.style("text-anchor", "end")	
 				.style("font-size", "12px")
 				.attr("x", xScale(0) - 10)
-				.attr("y", function(d, i) {return yScale(i);})
+				.attr("y", 0)
 				.attr("dy", "0.35em")
 				.text(function(d) { return d.GM_NAAM; });
 
@@ -257,12 +277,10 @@ function initiateScatter(data, width, height, margin) {
 		.call(barAxis);
 	
 	//Create the bars themselves
-	scatterChart.selectAll(".scatterBar")
-			.data(data)
-			.enter().append("rect")
+	scatterElement.append("rect")
 				.attr("class", "scatterBar")
 				.attr("x", barStart)
-				.attr("y", function(d, i) {return yScale(i) - barHeight/2;})
+				.attr("y", - barHeight/2)
 				.attr("width", function(d) { return barScale(d.houses_need); })
 				.attr("height", barHeight)
 				.style("fill", "#DCDCDC");
@@ -287,8 +305,8 @@ function initiateScatter(data, width, height, margin) {
 	medianLine.append("line")
 		.attr("x1", xScale(1))
 		.attr("x2",  xScale(1))
-		.attr("y1", yScale(data.length-1) - 15)
-		.attr("y2", yScale(0) + 15)
+		.attr("y1", 30)
+		.attr("y2", height + 15)
 		.style("stroke", "#B5B5B5")
 		.style("shape-rendering", "crispEdges")
 		.style("stroke-dasharray", "2 2")
@@ -315,7 +333,7 @@ function initiateScatter(data, width, height, margin) {
 	
 	//Create a wrapper for the circle legend				
 	var legendCircle = scatterChart.append("g").attr("class", "legendWrapper")
-					.attr("transform", "translate(" + (moveToRight + (width-moveToRight-barChartWidth)/2) + "," + (scatterMargin.top/2) +")");
+					.attr("transform", "translate(" + (width/2) + "," + (scatterMargin.top/2) +")");
 	
 	//The grey circle
 	legendCircle.append("text")
@@ -339,7 +357,7 @@ function initiateScatter(data, width, height, margin) {
 		.attr("y", 0)
 		.attr("dy", "0.35em")
 		.style("text-anchor", "start")
-		.text("Plan- + Transformatiecapaciteit");
+		.text("Plan & Transformatiecapaciteit");
 	legendCircle.append("circle")
         .attr('r', 5)
         .attr('cx', 20)

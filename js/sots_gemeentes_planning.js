@@ -7,7 +7,11 @@ var gemeentesPlanning = [
     "houses_need": 3000,
     "perc_planning": 0.1057,
     "perc_transformation": 0.1297,
-    "perc_total": 0.2354
+    "perc_total": 0.2354,
+    "orderTotal": 1,
+    "orderTrans": 17,
+    "orderPlan": 1,
+    "orderHouses": 8,
 },
 {
     "GM_NAAM": "Leidschendam-Voorburg",
@@ -17,7 +21,11 @@ var gemeentesPlanning = [
     "houses_need": 2700,
     "perc_planning": 0.3752,
     "perc_transformation": 0.0852,
-    "perc_total": 0.4604
+    "perc_total": 0.4604,
+    "orderTotal": 2,
+    "orderTrans": 12,
+    "orderPlan": 2,
+    "orderHouses": 6,
 },
 {
     "GM_NAAM": "Rijswijk",
@@ -27,7 +35,11 @@ var gemeentesPlanning = [
     "houses_need": 6400,
     "perc_planning": 0.4655,
     "perc_transformation": 0.0453,
-    "perc_total": 0.5108
+    "perc_total": 0.5108,
+    "orderTotal": 3,
+    "orderTrans": 5,
+    "orderPlan": 3,
+    "orderHouses": 18,
 },
 {
     "GM_NAAM": "Nieuwegein",
@@ -37,7 +49,11 @@ var gemeentesPlanning = [
     "houses_need": 2200,
     "perc_planning": 0.5777,
     "perc_transformation": 0.1027,
-    "perc_total": 0.6804
+    "perc_total": 0.6804,
+    "orderTotal": 4,
+    "orderTrans": 15,
+    "orderPlan": 4,
+    "orderHouses": 4,
 },
 {
     "GM_NAAM": "Amstelveen",
@@ -47,17 +63,25 @@ var gemeentesPlanning = [
     "houses_need": 4800,
     "perc_planning": 0.5896,
     "perc_transformation": 0.1912,
-    "perc_total": 0.7808
+    "perc_total": 0.7808,
+    "orderTotal": 5,
+    "orderTrans": 23,
+    "orderPlan": 5,
+    "orderHouses": 13,
 },
 {
-    "GM_NAAM": "'s Gravenhage",
+    "GM_NAAM": "s Gravenhage",
     "GM_CODE": "GM0518",
     "houses_planning": 11650,
     "houses_transformation": 2907,
     "houses_need": 18100,
     "perc_planning": 0.6436,
     "perc_transformation": 0.1606,
-    "perc_total": 0.8042
+    "perc_total": 0.8042,
+    "orderTotal": 6,
+    "orderTrans": 20,
+    "orderPlan": 6,
+    "orderHouses": 25,
 },
 {
     "GM_NAAM": "Haarlem",
@@ -67,7 +91,11 @@ var gemeentesPlanning = [
     "houses_need": 6700,
     "perc_planning": 0.8687,
     "perc_transformation": 0.0482,
-    "perc_total": 0.9169
+    "perc_total": 0.9169,
+    "orderTotal": 7,
+    "orderTrans": 6,
+    "orderPlan": 8,
+    "orderHouses": 20,
 },
 {
     "GM_NAAM": "Utrecht",
@@ -77,7 +105,11 @@ var gemeentesPlanning = [
     "houses_need": 26000,
     "perc_planning": 0.9068,
     "perc_transformation": 0.0292,
-    "perc_total": 0.936
+    "perc_total": 0.936,
+    "orderTotal": 8,
+    "orderTrans": 1,
+    "orderPlan": 9,
+    "orderHouses": 26,
 },
 {
     "GM_NAAM": "Stichtse Vecht",
@@ -87,7 +119,11 @@ var gemeentesPlanning = [
     "houses_need": 1200,
     "perc_planning": 0.8633,
     "perc_transformation": 0.19,
-    "perc_total": 1.0533
+    "perc_total": 1.0533,
+    "orderTotal": 9,
+    "orderTrans": 22,
+    "orderPlan": 7,
+    "orderHouses": 2,
 },
 {
     "GM_NAAM": "Haarlemmermeer",
@@ -97,7 +133,11 @@ var gemeentesPlanning = [
     "houses_need": 9700,
     "perc_planning": 0.9712,
     "perc_transformation": 0.0919,
-    "perc_total": 1.0631
+    "perc_total": 1.0631,
+    "orderTotal": 10,
+    "orderTrans": 14,
+    "orderPlan": 10,
+    "orderHouses": 23,
 },
 {
     "GM_NAAM": "Leiden",
@@ -107,7 +147,11 @@ var gemeentesPlanning = [
     "houses_need": 5300,
     "perc_planning": 1.0558,
     "perc_transformation": 0.0779,
-    "perc_total": 1.1337
+    "perc_total": 1.1337,
+    "orderTotal": 11,
+    "orderTrans": 10,
+    "orderPlan": 12,
+    "orderHouses": 14,
 },
 {
     "GM_NAAM": "Amersfoort",
@@ -117,7 +161,11 @@ var gemeentesPlanning = [
     "houses_need": 7100,
     "perc_planning": 1.1308,
     "perc_transformation": 0.0444,
-    "perc_total": 1.1752
+    "perc_total": 1.1752,
+    "orderTotal": 12,
+    "orderTrans": 4,
+    "orderPlan": 14,
+    "orderHouses": 21,
 },
 {
     "GM_NAAM": "Amsterdam",
@@ -127,7 +175,11 @@ var gemeentesPlanning = [
     "houses_need": 36100,
     "perc_planning": 1.1204,
     "perc_transformation": 0.0674,
-    "perc_total": 1.1878
+    "perc_total": 1.1878,
+    "orderTotal": 13,
+    "orderTrans": 9,
+    "orderPlan": 13,
+    "orderHouses": 27,
 },
 {
     "GM_NAAM": "Hilversum",
@@ -137,7 +189,11 @@ var gemeentesPlanning = [
     "houses_need": 2900,
     "perc_planning": 0.9879,
     "perc_transformation": 0.2359,
-    "perc_total": 1.2238
+    "perc_total": 1.2238,
+    "orderTotal": 14,
+    "orderTrans": 25,
+    "orderPlan": 11,
+    "orderHouses": 7,
 },
 {
     "GM_NAAM": "Breda",
@@ -147,7 +203,11 @@ var gemeentesPlanning = [
     "houses_need": 7100,
     "perc_planning": 1.3521,
     "perc_transformation": 0.0299,
-    "perc_total": 1.382
+    "perc_total": 1.382,
+    "orderTotal": 15,
+    "orderTrans": 2,
+    "orderPlan": 18,
+    "orderHouses": 22,
 },
 {
     "GM_NAAM": "Arnhem",
@@ -157,7 +217,11 @@ var gemeentesPlanning = [
     "houses_need": 6000,
     "perc_planning": 1.264,
     "perc_transformation": 0.1198,
-    "perc_total": 1.3838
+    "perc_total": 1.3838,
+    "orderTotal": 16,
+    "orderTrans": 16,
+    "orderPlan": 15,
+    "orderHouses": 16,
 },
 {
     "GM_NAAM": "Zwolle",
@@ -167,7 +231,11 @@ var gemeentesPlanning = [
     "houses_need": 6600,
     "perc_planning": 1.3468,
     "perc_transformation": 0.0497,
-    "perc_total": 1.3965
+    "perc_total": 1.3965,
+    "orderTotal": 17,
+    "orderTrans": 7,
+    "orderPlan": 17,
+    "orderHouses": 19,
 },
 {
     "GM_NAAM": "Enschede",
@@ -177,7 +245,11 @@ var gemeentesPlanning = [
     "houses_need": 3400,
     "perc_planning": 1.3574,
     "perc_transformation": 0.0794,
-    "perc_total": 1.4368
+    "perc_total": 1.4368,
+    "orderTotal": 18,
+    "orderTrans": 11,
+    "orderPlan": 19,
+    "orderHouses": 10,
 },
 {
     "GM_NAAM": "Gouda",
@@ -187,17 +259,25 @@ var gemeentesPlanning = [
     "houses_need": 3300,
     "perc_planning": 1.277,
     "perc_transformation": 0.1794,
-    "perc_total": 1.4564
+    "perc_total": 1.4564,
+    "orderTotal": 19,
+    "orderTrans": 21,
+    "orderPlan": 16,
+    "orderHouses": 9,
 },
 {
-    "GM_NAAM": "'s Hertogenbosch",
+    "GM_NAAM": "s Hertogenbosch",
     "GM_CODE": "GM0796",
     "houses_planning": 8595,
     "houses_transformation": 213,
     "houses_need": 5700,
     "perc_planning": 1.5079,
     "perc_transformation": 0.0374,
-    "perc_total": 1.5453
+    "perc_total": 1.5453,
+    "orderTotal": 20,
+    "orderTrans": 3,
+    "orderPlan": 21,
+    "orderHouses": 15,
 },
 {
     "GM_NAAM": "Apeldoorn",
@@ -207,7 +287,11 @@ var gemeentesPlanning = [
     "houses_need": 4000,
     "perc_planning": 1.4002,
     "perc_transformation": 0.2118,
-    "perc_total": 1.612
+    "perc_total": 1.612,
+    "orderTotal": 21,
+    "orderTrans": 24,
+    "orderPlan": 20,
+    "orderHouses": 11,
 },
 {
     "GM_NAAM": "Helmond",
@@ -217,7 +301,11 @@ var gemeentesPlanning = [
     "houses_need": 4200,
     "perc_planning": 1.6274,
     "perc_transformation": 0.0514,
-    "perc_total": 1.6788
+    "perc_total": 1.6788,
+    "orderTotal": 22,
+    "orderTrans": 8,
+    "orderPlan": 22,
+    "orderHouses": 12,
 },
 {
     "GM_NAAM": "Eindhoven",
@@ -227,7 +315,11 @@ var gemeentesPlanning = [
     "houses_need": 6400,
     "perc_planning": 2.0562,
     "perc_transformation": 0.0872,
-    "perc_total": 2.1434
+    "perc_total": 2.1434,
+    "orderTotal": 23,
+    "orderTrans": 13,
+    "orderPlan": 23,
+    "orderHouses": 17,
 },
 {
     "GM_NAAM": "Zoetermeer",
@@ -237,7 +329,11 @@ var gemeentesPlanning = [
     "houses_need": 2500,
     "perc_planning": 2.2472,
     "perc_transformation": 0.1532,
-    "perc_total": 2.4004
+    "perc_total": 2.4004,
+    "orderTotal": 24,
+    "orderTrans": 19,
+    "orderPlan": 25,
+    "orderHouses": 5,
 },
 {
     "GM_NAAM": "Maastricht",
@@ -247,7 +343,11 @@ var gemeentesPlanning = [
     "houses_need": 1200,
     "perc_planning": 2.1875,
     "perc_transformation": 0.2683,
-    "perc_total": 2.4558
+    "perc_total": 2.4558,
+    "orderTotal": 25,
+    "orderTrans": 27,
+    "orderPlan": 24,
+    "orderHouses": 1,
 },
 {
     "GM_NAAM": "Rotterdam",
@@ -257,7 +357,11 @@ var gemeentesPlanning = [
     "houses_need": 11500,
     "perc_planning": 2.2817,
     "perc_transformation": 0.2532,
-    "perc_total": 2.5349
+    "perc_total": 2.5349,
+    "orderTotal": 26,
+    "orderTrans": 26,
+    "orderPlan": 26,
+    "orderHouses": 24,
 },
 {
     "GM_NAAM": "Roermond",
@@ -267,6 +371,10 @@ var gemeentesPlanning = [
     "houses_need": 1500,
     "perc_planning": 2.42,
     "perc_transformation": 0.1513,
-    "perc_total": 2.5713
+    "perc_total": 2.5713,
+    "orderTotal": 27,
+    "orderTrans": 18,
+    "orderPlan": 27,
+    "orderHouses": 3,
 }
 ]
