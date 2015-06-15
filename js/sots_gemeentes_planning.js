@@ -50,7 +50,7 @@ var gemeentesPlanning = [
     "perc_total": 0.7808
 },
 {
-    "GM_NAAM": "S Gravenhage",
+    "GM_NAAM": "'s Gravenhage",
     "GM_CODE": "GM0518",
     "houses_planning": 11650,
     "houses_transformation": 2907,
@@ -190,7 +190,7 @@ var gemeentesPlanning = [
     "perc_total": 1.4564
 },
 {
-    "GM_NAAM": "S Hertogenbosch",
+    "GM_NAAM": "'s Hertogenbosch",
     "GM_CODE": "GM0796",
     "houses_planning": 8595,
     "houses_transformation": 213,
