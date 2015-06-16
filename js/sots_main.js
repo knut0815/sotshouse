@@ -82,7 +82,7 @@ var colorGreen = d3.scale.threshold()
 
 //Draw the NL map
 drawMap(mapWrapper = map, colorScale = colorGreen, colorVar = "perc_groei_trans", 
-		mapTitle = "", width = mapWidth, height = mapHeight);
+		mapTitle = "", width = mapWidth, height = mapHeight, margin = mapMargin);
 //Draw the legend below the map
 createMapLegend(mapLegendWrapper, mapWidth, mapHeight, mapMargin, "Huishoudensgroei in potentie op te vullen door kantorentransformatie")
 

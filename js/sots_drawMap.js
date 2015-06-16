@@ -2,16 +2,18 @@
 /////////////////// Draw the Map /////////////////////
 //////////////////////////////////////////////////////
 		
-function drawMap(mapWrapper, colorScale, colorVar, mapTitle, width, height) {
+function drawMap(mapWrapper, colorScale, colorVar, mapTitle, width, height, margin) {
 	
 	////////////////////////////////////////////////////////////	
 	///////////////////// Initiate Map /////////////////////////
 	////////////////////////////////////////////////////////////
 	
+	var mapScale = (width+margin.left+margin.right > 450 ? 5500 : 4500);
+	
 	// new projection
 	var projection = d3.geo.mercator()
 						.center(d3.geo.centroid(gemeentesGeo))
-						.scale(5500)
+						.scale(mapScale)
 						.translate([(width/2 + 50), (height/2 - 30)]);
 	var path = d3.geo.path().projection(projection);
 
