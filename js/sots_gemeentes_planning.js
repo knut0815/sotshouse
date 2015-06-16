@@ -14,7 +14,7 @@ var gemeentesPlanning = [
     "orderHouses": 8,
 },
 {
-    "GM_NAAM": "Leidschendam-Voorburg",
+    "GM_NAAM": "L'dam-Voorburg",
     "GM_CODE": "GM1916",
     "houses_planning": 1013,
     "houses_transformation": 230,

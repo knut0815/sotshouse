@@ -27,7 +27,7 @@ var mapLegendWrapper = svgMap.append("g").attr("class", "legend");
 ///////////////////////////////////////////////////////////////////////////
 /////////////////////////// Initiate Tree Maps  ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-var treeMargin = {left: 50, top: 50, right: 40, bottom: 20},
+var treeMargin = {left: 50, top: 60, right: 40, bottom: 20},
 	treeWidth = Math.min($(".dataresource.treemap.potentie").width(),700) - treeMargin.left - treeMargin.right,
 	treeHeight = mapHeight + 50 - (treeMargin.top - mapMargin.top);
 	
@@ -46,9 +46,9 @@ var treeLegendWrapperPotentie = svgTreePotentie.append("g").attr("class", "legen
 ///////////////////////////////////////////////////////////////////////////
 //////////////////////// Initiate Scatter plot  ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-var scatterMargin = {left: 40, top: 20, right: 40, bottom: 80},
+var scatterMargin = {left: 40, top: 20, right: 40, bottom: 100},
 	scatterWidth = $(".dataresource.scatter").width() - scatterMargin.left - scatterMargin.right,
-	scatterHeight = Math.min(700, Math.max(500, $(window).height() - 140)) - scatterMargin.top - scatterMargin.bottom;
+	scatterHeight = Math.min(700, Math.max(500, $(window).height() - 120)) - scatterMargin.top - scatterMargin.bottom;
 
 //Potentie
 var svgScatter = d3.select(".dataresource.scatter").append("svg")
@@ -159,8 +159,8 @@ initiateScatter(gemeentesPlanning, scatterWidth, scatterHeight, scatterMargin);
 
 function initiateScatter(data, width, height, margin) {
 
-	var moveToRight = 120,
-		barChartWidth = Math.min(200, width*0.25);
+	var moveToRight = 70,
+		barChartWidth = Math.min(220, (width-moveToRight)*0.25);
 	
 	//////////////////////////////////////////////////////
 	/////////////////// Initialize Axes //////////////////
@@ -299,7 +299,7 @@ function initiateScatter(data, width, height, margin) {
 		.attr("x", 0)
 		.attr("y", 0)
 		.attr("dy", "0em")
-		.text("Percentage van behoefte aan woningen tot 2025")
+		.text("Percentage van verwachte huishoudensgroei 2025")
 		.call(wrap, (width-moveToRight-barChartWidth)*0.9);
 		
 	//Create the g group to hold the data
@@ -332,7 +332,7 @@ function initiateScatter(data, width, height, margin) {
 		.attr("x", 0)
 		.attr("y", 0)
 		.attr("dy", "0em")
-		.text("Verwachte huishoudensgroei tot 2025")
+		.text("Verwachte huishoudensgroei tot 2025 (absoluut)")
 		.call(wrap, barChartWidth*0.9);
 		
 	//////////////////////////////////////////////////////
