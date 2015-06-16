@@ -9,7 +9,7 @@
 //General widths and heights	
 var mapMargin = {left: 50, top: 20, right: 40, bottom: 60},
 	mapWidth = Math.min($(".dataresource.map").width(),500) - mapMargin.left - mapMargin.right,
-	mapHeight = mapWidth*7/5 - mapMargin.top - mapMargin.bottom;
+	mapHeight =  Math.max(550, mapWidth*7/5) - mapMargin.top - mapMargin.bottom;
 
 //Create SVG inside the div	
 var svgMap = d3.select(".dataresource.map").append("svg")
@@ -27,7 +27,7 @@ var mapLegendWrapper = svgMap.append("g").attr("class", "legend");
 ///////////////////////////////////////////////////////////////////////////
 /////////////////////////// Initiate Tree Maps  ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-var treeMargin = {left: 50, top: 50, right: 40, bottom: 60},
+var treeMargin = {left: 50, top: 50, right: 40, bottom: 20},
 	treeWidth = Math.min($(".dataresource.treemap.potentie").width(),700) - treeMargin.left - treeMargin.right,
 	treeHeight = mapHeight + 50 - (treeMargin.top - mapMargin.top);
 	
@@ -84,10 +84,10 @@ var colorGreen = d3.scale.threshold()
 drawMap(mapWrapper = map, colorScale = colorGreen, colorVar = "perc_groei_trans", 
 		mapTitle = "", width = mapWidth, height = mapHeight);
 //Draw the legend below the map
-createMapLegend(mapLegendWrapper, mapWidth, mapHeight, "% dat kan voldoen aan de huisvraag door transformatie")
+createMapLegend(mapLegendWrapper, mapWidth, mapHeight, mapMargin, "Huishoudensgroei in potentie op te vullen door kantorentransformatie")
 
 //Initiate the call out
-drawCallout(calloutWrapper = mapCallout, topText = "Groei aan woningen tot 2025", bottomText = "Nieuwe woningen door transformatie");
+drawCallout(calloutWrapper = mapCallout, topText = "Verwachte huishoudensgroei tot 2025", bottomText = "Woningen door kantorentransformatie");
 
 ////////////// Create the search box //////////////////
 
@@ -325,7 +325,7 @@ function initiateScatter(data, width, height, margin) {
 		.attr("text-anchor", "middle")
 		.attr("transform", "translate(" + (barStart + barChartWidth/2) + "," + (height + 60) + ")")
 		.style("font-size", "10px")
-		.text("Benodigde woningen tot 2025");
+		.text("Verwachte huishoudensgroei tot 2025");
 		
 	//////////////////////////////////////////////////////
 	///////////////// Initialize Legend //////////////////
@@ -357,7 +357,7 @@ function initiateScatter(data, width, height, margin) {
 		.attr("y", 0)
 		.attr("dy", "0.35em")
 		.style("text-anchor", "start")
-		.text("Plan & Transformatiecapaciteit");
+		.text("Plancapaciteit incl. transformatiepotentie");
 	legendCircle.append("circle")
         .attr('r', 5)
         .attr('cx', 20)
@@ -417,6 +417,9 @@ function fadeIn(d) {
 	if (GM_CODES[chosen.GM_CODE] === undefined) {
 		mapCallout.selectAll("#callout_top").text("-");
 		mapCallout.selectAll("#callout_bottom").text("-");
+	} else if (gemeentes[GM_CODES[chosen.GM_CODE]].NVM === "NO") {
+		mapCallout.selectAll("#callout_top").text(NLformat(Math.round(gemeentes[GM_CODES[chosen.GM_CODE]].behoefte_woningen/10,0)*10));
+		mapCallout.selectAll("#callout_bottom").text("-")
 	} else {
 		mapCallout.selectAll("#callout_top").text(NLformat(Math.round(gemeentes[GM_CODES[chosen.GM_CODE]].behoefte_woningen/10,0)*10));
 		mapCallout.selectAll("#callout_bottom").text(NLformat(Math.round(gemeentes[GM_CODES[chosen.GM_CODE]].kantoren_woningen/10,0)*10));

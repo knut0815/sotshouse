@@ -12,7 +12,7 @@ function drawMap(mapWrapper, colorScale, colorVar, mapTitle, width, height) {
 	var projection = d3.geo.mercator()
 						.center(d3.geo.centroid(gemeentesGeo))
 						.scale(5500)
-						.translate([(width/2 + 50), (height/2 - 40)]);
+						.translate([(width/2 + 50), (height/2 - 30)]);
 	var path = d3.geo.path().projection(projection);
 
 	mapWrapper.selectAll("path")
@@ -61,15 +61,17 @@ function zoomTreemap(d) {
 ///////////////////////////////////////////////////////////////////////////
 //////////////////////// Create the legends ///////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-function createMapLegend(wrapper, width, height, title) {
+function createMapLegend(wrapper, width, height, margin, title) {
 	
 	var legendRectSize = 10, //dimensions of the colored square
 		legendMaxWidth = 100, //maximum size that the longest element will be - to center content
 		legendSectorHeight = 14,
 		legendTitleSection = 18,
-		legendText = ["0%","0 - 5%","5% - 10%","> 10%","Daling in huisvraag","Onbekend"];
+		legendHeight = 40,
+		yoff = 30,
+		legendText = ["0%","0 - 5%","5% - 10%","> 10%","Daling in huishoudensgroei","Onbekend"];
 	
-	wrapper.attr("transform", "translate(" + (20) + "," + (height*5/6) + ")");
+	wrapper.attr("transform", "translate(" + (20) + "," + (margin.top + height - legendHeight - yoff) + ")");
 	
 	//Append title to Legend
 	wrapper.append('text')                                     

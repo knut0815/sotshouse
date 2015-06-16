@@ -4,7 +4,7 @@
 
 function drawCallout(calloutWrapper, topText, bottomText) {
 	var calloutMarginLeft = 0,
-		callOutNumbers = calloutMarginLeft + 180;
+		callOutNumbers = calloutMarginLeft + 190;
 		
 	calloutWrapper.append("text")
 		.attr("class", "callout")
