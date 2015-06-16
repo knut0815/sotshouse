@@ -46,7 +46,7 @@ var treeLegendWrapperPotentie = svgTreePotentie.append("g").attr("class", "legen
 ///////////////////////////////////////////////////////////////////////////
 //////////////////////// Initiate Scatter plot  ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-var scatterMargin = {left: 20, top: 20, right: 20, bottom: ($(window).width() > 450 ? 80 : 100)},
+var scatterMargin = {left: 30, top: 20, right: 20, bottom: ($(window).width() > 450 ? 80 : 100)},
 	scatterWidth = $(".dataresource.scatter").width() - scatterMargin.left - scatterMargin.right,
 	scatterHeight = Math.min(700, Math.max(500, $(window).height() - 120)) - scatterMargin.top - scatterMargin.bottom;
 
@@ -160,7 +160,7 @@ initiateScatter(gemeentesPlanning, scatterWidth, scatterHeight, scatterMargin);
 
 function initiateScatter(data, width, height, margin) {
 
-	var moveToRight = 70,
+	var moveToRight = 80,
 		barChartWidth = Math.min(220, (width-moveToRight)*0.25);
 	
 	//////////////////////////////////////////////////////
@@ -347,14 +347,14 @@ function initiateScatter(data, width, height, margin) {
 	//The grey circle
 	legendCircle.append("text")
 		.attr("class","legendTitle")
-		.attr("x", -110)
+		.attr("x", -120)
 		.attr("y", 0)
 		.attr("dy", "0.35em")
 		.style("text-anchor", "start")
 		.text("Plancapaciteit");
 	legendCircle.append("circle")
         .attr('r', 5)
-        .attr('cx', -120)
+        .attr('cx', -130)
         .attr('cy', 0)
 		.style("opacity", 0.8)
 		.style("fill", "#8C8C8C");	
@@ -362,14 +362,14 @@ function initiateScatter(data, width, height, margin) {
 	//The green circle
 	legendCircle.append("text")
 		.attr("class","legendTitle")
-		.attr("x", 30)
+		.attr("x", 20)
 		.attr("y", 0)
 		.attr("dy", "0.35em")
 		.style("text-anchor", "start")
 		.text("Plancapaciteit incl. transformatiepotentie");
 	legendCircle.append("circle")
         .attr('r', 5)
-        .attr('cx', 20)
+        .attr('cx', 10)
         .attr('cy', 0)
 		.style("opacity", 0.8)
 		.style("fill", "#81BC00");			
