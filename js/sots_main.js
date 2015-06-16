@@ -46,7 +46,7 @@ var treeLegendWrapperPotentie = svgTreePotentie.append("g").attr("class", "legen
 ///////////////////////////////////////////////////////////////////////////
 //////////////////////// Initiate Scatter plot  ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-var scatterMargin = {left: 40, top: 20, right: 40, bottom: 100},
+var scatterMargin = {left: 20, top: 20, right: 20, bottom: ($(window).width() > 450 ? 80 : 100)},
 	scatterWidth = $(".dataresource.scatter").width() - scatterMargin.left - scatterMargin.right,
 	scatterHeight = Math.min(700, Math.max(500, $(window).height() - 120)) - scatterMargin.top - scatterMargin.bottom;
 
@@ -111,7 +111,8 @@ $('.combobox').combobox();
 //Draw the Potentie treeMap
 drawTree(wrapper = svgTreePotentie, subwrapper = treeMapChartPotentie, colorScale = colorGreen, width = treeWidth, 
 		 height = treeHeight, margin = treeMargin, sizeVar = "potentie_leegstand_m2", colorVar = "perc_groei_trans", title = "");
-	
+
+d3.select(".mapRowWrapper").on("click", fadeOut);
 //////////////////// Connected scatterplot //////////////////////
 
 

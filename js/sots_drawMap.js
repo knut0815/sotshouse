@@ -9,12 +9,13 @@ function drawMap(mapWrapper, colorScale, colorVar, mapTitle, width, height, marg
 	////////////////////////////////////////////////////////////
 	
 	var mapScale = (width+margin.left+margin.right > 450 ? 5500 : 4500);
+	var mapMove = (width+margin.left+margin.right > 450 ? 50 : 40);
 	
 	// new projection
 	var projection = d3.geo.mercator()
 						.center(d3.geo.centroid(gemeentesGeo))
 						.scale(mapScale)
-						.translate([(width/2 + 50), (height/2 - 30)]);
+						.translate([(width/2 + mapMove), (height/2 - 30)]);
 	var path = d3.geo.path().projection(projection);
 
 	mapWrapper.selectAll("path")

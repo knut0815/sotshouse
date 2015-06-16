@@ -14,7 +14,7 @@ var gemeentesPlanning = [
     "orderHouses": 8,
 },
 {
-    "GM_NAAM": "Leidschendam-Voorburg",
+    "GM_NAAM": "L'dam-Voorburg",
     "GM_CODE": "GM1916",
     "houses_planning": 675,
     "houses_transformation": 230,
@@ -56,7 +56,7 @@ var gemeentesPlanning = [
     "orderHouses": 4,
 },
 {
-    "GM_NAAM": "s Gravenhage",
+    "GM_NAAM": "'s Gravenhage",
     "GM_CODE": "GM0518",
     "houses_planning": 7767,
     "houses_transformation": 2907,
@@ -266,7 +266,7 @@ var gemeentesPlanning = [
     "orderHouses": 16,
 },
 {
-    "GM_NAAM": "s Hertogenbosch",
+    "GM_NAAM": "'s Hertogenbosch",
     "GM_CODE": "GM0796",
     "houses_planning": 8595,
     "houses_transformation": 213,
