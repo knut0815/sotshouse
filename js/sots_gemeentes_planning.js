@@ -70,7 +70,7 @@ var gemeentesPlanning = [
     "orderHouses": 13,
 },
 {
-    "GM_NAAM": "s Gravenhage",
+    "GM_NAAM": "'s Gravenhage",
     "GM_CODE": "GM0518",
     "houses_planning": 11650,
     "houses_transformation": 2907,
@@ -266,7 +266,7 @@ var gemeentesPlanning = [
     "orderHouses": 9,
 },
 {
-    "GM_NAAM": "s Hertogenbosch",
+    "GM_NAAM": "'s Hertogenbosch",
     "GM_CODE": "GM0796",
     "houses_planning": 8595,
     "houses_transformation": 213,
