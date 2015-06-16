@@ -38,7 +38,11 @@ function drawTree(wrapper, subwrapper, colorScale, width, height, margin, sizeVa
 		.style("text-anchor", "middle")
 		.style("font-size", "11px")
 		.style("fill", "#8F8F8F")
-		.text("Klik op een gemeente om in te zoomen naar de bijbehorende provincie");			
+		.attr("x", 0)
+		.attr("y", 0)
+		.attr("dy", "0em")
+		.text("Klik op een gemeente om in te zoomen naar de bijbehorende provincie")
+		.call(wrap, width*0.9);		
  
 	xTreeScale = d3.scale.linear().range([0, width]),
 	yTreeScale = d3.scale.linear().range([0, height]);

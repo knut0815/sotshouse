@@ -159,8 +159,8 @@ initiateScatter(gemeentesPlanning, scatterWidth, scatterHeight, scatterMargin);
 
 function initiateScatter(data, width, height, margin) {
 
-	var moveToRight = 130,
-		barChartWidth = Math.max(130, width*0.25);
+	var moveToRight = 120,
+		barChartWidth = Math.min(200, width*0.25);
 	
 	//////////////////////////////////////////////////////
 	/////////////////// Initialize Axes //////////////////
@@ -296,7 +296,11 @@ function initiateScatter(data, width, height, margin) {
 		.attr("text-anchor", "middle")
 		.attr("transform", "translate(" + (moveToRight + (width-moveToRight-barChartWidth)/2) + "," + (height + 60) + ")")
 		.style("font-size", "10px")
-		.text("Percentage van behoefte aan woningen tot 2025");
+		.attr("x", 0)
+		.attr("y", 0)
+		.attr("dy", "0em")
+		.text("Percentage van behoefte aan woningen tot 2025")
+		.call(wrap, (width-moveToRight-barChartWidth)*0.9);
 		
 	//Create the g group to hold the data
 	var medianLine = scatterChart.append("g").attr("class", "median")
@@ -325,7 +329,11 @@ function initiateScatter(data, width, height, margin) {
 		.attr("text-anchor", "middle")
 		.attr("transform", "translate(" + (barStart + barChartWidth/2) + "," + (height + 60) + ")")
 		.style("font-size", "10px")
-		.text("Verwachte huishoudensgroei tot 2025");
+		.attr("x", 0)
+		.attr("y", 0)
+		.attr("dy", "0em")
+		.text("Verwachte huishoudensgroei tot 2025")
+		.call(wrap, barChartWidth*0.9);
 		
 	//////////////////////////////////////////////////////
 	///////////////// Initialize Legend //////////////////

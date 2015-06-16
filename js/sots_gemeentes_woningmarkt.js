@@ -9,7 +9,7 @@ var gemeentes = [
     "perc_groei_trans": 0.253
 },
 {
-    "GM_NAAM": "s Gravenhage",
+    "GM_NAAM": "'s Gravenhage",
     "GM_CODE": "GM0518",
     "Provincie": "Zuid-Holland",
     "NVM": "YES",
@@ -252,7 +252,7 @@ var gemeentes = [
     "perc_groei_trans": 0.051
 },
 {
-    "GM_NAAM": "s Hertogenbosch",
+    "GM_NAAM": "'s Hertogenbosch",
     "GM_CODE": "GM0796",
     "Provincie": "Noord-Brabant",
     "NVM": "YES",
