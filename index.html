@@ -11,35 +11,18 @@
 	<!-- ADD ALL SOTS HTML FRAGMENTS CSS HERE -->
 	
 	<!-- D3.js -->
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-	<script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="js/sots_woning_d3_topo.min.js"></script>
 	
 	<!-- jQuery -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
+	<!--<link rel="stylesheet" href="css/bootstrap.css">-->
+	<link rel="stylesheet" href="css/custom-bootstrap.css">
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>-->
 
-	<!-- Combobox script for the search box -->
-	<script src="js/bootstrap-combobox.js"></script>
-	<link href="css/bootstrap-combobox.css" type="text/css" rel="stylesheet">
-	
-	
-	<!-- Needed for all -->
 	<link rel="stylesheet" href="css/sots_style.css">
-	<script src="js/sots_gemeentes_woningmarkt.js"></script>
-	<script src="js/sots_helperFunctions.js"></script>
-	<!-- Needed for Map NL -->
-	<script src="js/sots_gemeentes_geo.js"></script>
-	<script src="js/sots_drawMap.js"></script>
-	<script src="js/sots_drawCallout.js"></script>
-	<!-- Needed for Treemaps -->
-	<script src="js/sots_treemap_provincies.js"></script>
-	<script src="js/sots_drawTree.js"></script>
-	<!-- Needed for scatter plots -->
-	<script src="js/sots_gemeentes_planning.js"></script>
-
 </head>
 
 <body>
@@ -49,13 +32,13 @@
 		<div id="cont" class="container-fluid">
 			<div class="row text-center mapRowWrapper">
 
-				<div class="col-md-6 column text-center">
+				<div class="col-md-6">
 					<div class="row">
-						<h4 style="color: #3B3B3B; padding-bottom: 10px;">Klein deel van de huishoudensgroei tot 2025 (ca. 3,5%) kan worden opgevangen door transformatie van kantoren</h4>
-						<div class="col-md-12 column"><div class="dataresource map"></div></div>
+						<div class="title-h4" style="color: #3B3B3B; padding-bottom: 10px;">Klein deel van de huishoudensgroei tot 2025 (circa 5,2%) kan worden opgevangen door transformatie van kantoren</div>
+						<div class="col-md-12"><div class="dataresource map"></div></div>
 					</div>
 					<div class="row">
-						<div class="col-sm-6 col-sm-offset-3 column">
+						<div class="col-sm-6 col-sm-offset-3">
 							 <div class="form-group">			
 								<select id="searchBoxMapNL" class="combobox input-large form-control" style="display: none;" onchange="searchEventMapNL(this.value)">
 								  <option value="" selected="selected">Zoek gemeente...</option>
@@ -65,13 +48,17 @@
 					</div>
 				</div>
 				
-				<div class="col-md-6 column text-center">
-					<h4 style="color: #3B3B3B;">150 gemeenten hebben transformatiepotentie, circa 80% hiervan is verdeeld over 30 gemeenten</h4>
+				<div class="col-md-6">
+					<div class="title-h4" style="color: #3B3B3B;">150 gemeenten hebben transformatiepotentie, circa 80% hiervan is verdeeld over 30 gemeenten</div>
 					<div class="dataresource treemap potentie"></div>
 					<div style="color: #6E6E6E; font-size: 14px; padding-bottom: 10px;">Aantal m<sup>2</sup> transformatiepotentie van kantoren per gemeente | Kleur gelijk aan kaart Nederland</div>
-					<div class="legendTitle" style="font-size: 8px;">NB: Deze 150 gemeenten komen uit de 258 beschikbare gemeenten bij NVM | Bron: NVM, CBS</div>
+					<div class="legendTitle" style="font-size: 9px;">NB: Deze 150 gemeenten komen uit de 258 beschikbare gemeenten bij NVM | Bron: CBS (2014), Kadaster (2014), NVM (2014)</div>
 				</div>
-				
+			</div>
+			<div class="row text-center">
+				<div class="col-md-12">
+					<div class="legendTitle" style="font-size: 9px; padding-top: 20px;">Bron: ...</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -83,14 +70,14 @@
 	<div class = "sotsVisualWrapper">
 		<div id="cont" class="container-fluid">
 			<div class="row text-center">
-				<div class="col-md-8 col-md-offset-2 column">
-					<h4 style="color: #3B3B3B;">Transformatie van kantoren als alternatief voor nieuwbouw van woningen?</h4>
+				<div class="col-md-12">
+					<div class="title-h4" style="color: #3B3B3B;">Transformatie van kantoren als alternatief voor nieuwbouw van woningen?</div>
 					<div class="dataresource scatter"></div>
 				</div>
 			</div>
 			
 			<div class="row text-center">
-				<div class="col-md-12 column">
+				<div class="col-md-12">
 					<div style="color: #6E6E6E; font-size: 12px; padding-bottom: 10px;">Selecteer een optie om de ordening van huishoudensgroei aan te passen</div>
 					<div class="btn-group btn-group-sm" data-toggle="buttons">
 						<label id="totalButton" class="btn btn-default active"><input type="radio" class="btn-options">Percentueel</label>
@@ -98,14 +85,25 @@
 						<!--<label id="transButton" class="btn btn-default"><input type="radio" class="btn-options">Transformatiepotentie</label>-->
 						<label id="housesButton" class="btn btn-default"><input type="radio" class="btn-options">Absoluut</label>
 					</div>
-					<div class="legendTitle" style="font-size: 9px; padding-top: 15px;">NB: Voor de 27 steden met de hoogste m<sup>2</sup> aan transformatiepotentie | Bron: NVM, CBS</div>
+				</div>
+			</div>
+			<div class="row text-center">
+				<div class="col-md-12">
+					<div class="legendTitle" style="font-size: 9px; padding-top: 20px;">NB: Voor de 27 steden met de hoogste m<sup>2</sup> aan transformatiepotentie | Bron: CBS (2014), NVM (2014)</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
 	<!-- ADD ALL SOTS HTML FRAGMENTS JS HERE -->
-	<script src="js/sots_main.js"></script>
+	<!-- Needed for all -->
+	<script src="js/sots_woning_geo.min.js"></script>
+	<script src="js/sots_woning_general.min.js"></script>
+	<!-- Needed for Map NL & Tree -->
+	<script src="js/sots_woning_map_tree.min.js"></script>
+	<!-- Needed for scatter plots -->
+	<script src="js/sots_woning_connected_scatter.min.js"></script>
+
 
 </body>
 </html>
