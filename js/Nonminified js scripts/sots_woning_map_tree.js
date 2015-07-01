@@ -99,7 +99,7 @@ function createMapLegend(wrapper, width, height, margin, title) {
 		legendTitleSection = 18,
 		legendHeight = 40,
 		yoff = 30,
-		legendText = ["0%","0 - 5%","5% - 10%","> 10%","Daling in huishoudensgroei","Onbekend"];
+		legendText = ["0%","0 - 5%","5% - 10%","> 10%","Daling in huishoudensgroei","Transformatiepotentie onbekend"];
 	
 	wrapper.attr("transform", "translate(" + (20) + "," + (margin.top + height - legendHeight - yoff) + ")");
 	
@@ -472,7 +472,7 @@ var colorGreen = d3.scale.threshold()
 drawMap(mapWrapper = map, colorScale = colorGreen, colorVar = "perc_groei_trans", 
 		mapTitle = "", width = mapWidth, height = mapHeight, margin = mapMargin);
 //Draw the legend below the map
-createMapLegend(mapLegendWrapper, mapWidth, mapHeight, mapMargin, "Huishoudensgroei in potentie op te vullen door kantorentransformatie")
+createMapLegend(mapLegendWrapper, mapWidth, mapHeight, mapMargin, "Huishoudensgroei in potentie op te vangen door kantorentransformatie")
 
 //Initiate the call out
 drawCallout(calloutWrapper = mapCallout, topText = "Verwachte huishoudensgroei tot 2025", bottomText = "Woningen door kantorentransformatie");

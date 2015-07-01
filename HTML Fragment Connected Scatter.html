@@ -1,36 +1,34 @@
 <!-- SotS HTML WoningMarkt Scatterplot Section -->
-<div class = "sotsVisualWrapper">
-	<div id="cont" class="container-fluid">
+<div id="cont" class="container-fluid">
+
+	<div class="row text-center">
+		<div class="col-md-10 col-md-offset-1">
+			<div style="font-size: 14px; color: #8F8F8F; padding-bottom: 20px;">
+				In circa de helft van de gemeenten met grootste transformatiepotentie in m<sup>2</sup> biedt de huidige (harde en zachte) plancapaciteit voldoende ruimte voor uitbreiding met de gesignaleerde transformatiepotentie 
+			</div>
+		</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-md-12">
+			<div class="dataresource scatter"></div>
+		</div>
+	</div>
 	
-		<div class="row text-center">
-            <div class="col-md-8 col-md-offset-2">
-                <div style="font-size: 14px; color: #8F8F8F; padding-bottom: 20px;">
-					Bij 14 van de 27 gemeenten met de hoogste m<sup>2</sup> aan transformatiepotentie is de huidige plancapaciteit groter dan de veronderstelde huishoudensgroei.
-				</div>
-            </div>
-        </div>
-		<div class="row text-center">
-			<div class="col-md-12">
-				<div class="dataresource scatter"></div>
+	<div class="row text-center">
+		<div class="col-md-12">
+			<div style="color: #6E6E6E; font-size: 12px; padding-bottom: 10px;">Selecteer een optie om de ordening van huishoudensgroei aan te passen</div>
+			<div class="btn-group btn-group-sm" data-toggle="buttons">
+				<label id="totalButton" class="btn btn-default active"><input type="radio" class="btn-options">Percentueel</label>
+				<!--<label id="planButton" class="btn btn-default"><input type="radio" class="btn-options"> Planning</label>-->
+				<!--<label id="transButton" class="btn btn-default"><input type="radio" class="btn-options">Transformatiepotentie</label>-->
+				<label id="housesButton" class="btn btn-default"><input type="radio" class="btn-options">Absoluut</label>
 			</div>
 		</div>
-		
-		<div class="row text-center">
-			<div class="col-md-12">
-				<div style="color: #6E6E6E; font-size: 12px; padding-bottom: 10px;">Selecteer een optie om de ordening van huishoudensgroei aan te passen</div>
-				<div class="btn-group btn-group-sm" data-toggle="buttons">
-					<label id="totalButton" class="btn btn-default active"><input type="radio" class="btn-options">Percentueel</label>
-					<!--<label id="planButton" class="btn btn-default"><input type="radio" class="btn-options"> Planning</label>-->
-					<!--<label id="transButton" class="btn btn-default"><input type="radio" class="btn-options">Transformatiepotentie</label>-->
-					<label id="housesButton" class="btn btn-default"><input type="radio" class="btn-options">Absoluut</label>
-				</div>
-			</div>
-		</div>
-		<div class="row text-center">
-			<div class="col-md-12">
-				<div class="legendTitle" style="font-size: 9px; padding-top: 20px;">NB: Voor de 27 steden met de hoogste m<sup>2</sup> aan transformatiepotentie</div>
-				<div class="legendTitle" style="font-size: 9px; padding-top: 10px;">Bron: Planbureau voor de Leefomgeving (of PBL) 2013, NVM Leegstand Kantoren 2015, Voorradprognoses en woonvisies via provinciale websites 2015</div>
-			</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-md-12">
+			<div class="legendTitle" style="font-size: 9px; padding-top: 20px;">NB: Voor de 27 steden met de hoogste m<sup>2</sup> aan transformatiepotentie | Deze getallen slaan op harde en zachte plancapaciteit</div>
+			<div class="legendTitle" style="font-size: 9px; padding-top: 10px;">Bron: Planbureau voor de Leefomgeving 2013, Kantoren in cijfers 2014 NVM en Drs. R.L. Bak, Voorradprognoses en woonvisies via provinciale websites 2015</div>
 		</div>
 	</div>
 </div>

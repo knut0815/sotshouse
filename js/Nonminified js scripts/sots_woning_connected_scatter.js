@@ -1,8 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////
 //////////////////////// Initiate Scatter plot  ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-var scatterMargin = {left: 30, top: 20, right: 40, bottom: ($(window).width() > 450 ? 80 : 100)},
-	scatterWidth = Math.min($(".dataresource.scatter").width(),700) - scatterMargin.left - scatterMargin.right,
+var scatterMargin = {left: 30, top: 20, right: 40, bottom: 100},
+	scatterWidth = Math.min($(".dataresource.scatter").width(),900) - scatterMargin.left - scatterMargin.right,
 	scatterHeight = Math.min(700, Math.max(500, $(window).height() - 120)) - scatterMargin.top - scatterMargin.bottom;
 
 //Potentie
@@ -162,30 +162,16 @@ var gemeentesPlanning = [
 {
     "GM_NAAM": "Zwolle",
     "GM_CODE": "GM0193",
-    "houses_planning": 5926,
+    "houses_planning": 5663,
     "houses_transformation": 328,
     "houses_need": 6600,
-    "perc_planning": 0.8979,
+    "perc_planning": 0.858,
     "perc_transformation": 0.0497,
-    "perc_total": 0.9476,
+    "perc_total": 0.9077,
     "orderTotal": 11,
     "orderTrans": 7,
     "orderPlan": 12,
     "orderHouses": 19,
-},
-{
-    "GM_NAAM": "Enschede",
-    "GM_CODE": "GM0153",
-    "houses_planning": 3077,
-    "houses_transformation": 270,
-    "houses_need": 3400,
-    "perc_planning": 0.905,
-    "perc_transformation": 0.0794,
-    "perc_total": 0.9844,
-    "orderTotal": 12,
-    "orderTrans": 11,
-    "orderPlan": 13,
-    "orderHouses": 10,
 },
 {
     "GM_NAAM": "Gouda",
@@ -196,10 +182,24 @@ var gemeentesPlanning = [
     "perc_planning": 0.8512,
     "perc_transformation": 0.1794,
     "perc_total": 1.0306,
-    "orderTotal": 13,
+    "orderTotal": 12,
     "orderTrans": 21,
     "orderPlan": 11,
     "orderHouses": 9,
+},
+{
+    "GM_NAAM": "Enschede",
+    "GM_CODE": "GM0153",
+    "houses_planning": 3428,
+    "houses_transformation": 270,
+    "houses_need": 3400,
+    "perc_planning": 1.0082,
+    "perc_transformation": 0.0794,
+    "perc_total": 1.0876,
+    "orderTotal": 13,
+    "orderTrans": 11,
+    "orderPlan": 13,
+    "orderHouses": 10,
 },
 {
     "GM_NAAM": "Haarlem",
