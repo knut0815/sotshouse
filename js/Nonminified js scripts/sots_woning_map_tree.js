@@ -6,6 +6,8 @@ var mapMargin = {left: 50, top: 20, right: 40, bottom: 60},
 	mapWidth = Math.min($(".dataresource.map").width(),500) - mapMargin.left - mapMargin.right,
 	mapHeight =  Math.max(550, mapWidth*7/5) - mapMargin.top - mapMargin.bottom;
 
+var mobileScreen = ($(window).width() > 400 ? false : true);
+	
 //Create SVG inside the div	
 var svgMap = d3.select(".dataresource.map").append("svg")
 		.attr("width", (mapWidth + mapMargin.left + mapMargin.right))
@@ -22,7 +24,7 @@ var mapLegendWrapper = svgMap.append("g").attr("class", "legend");
 ///////////////////////////////////////////////////////////////////////////
 /////////////////////////// Initiate Tree Maps  ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-var treeMargin = {left: 50, top: 60, right: 40, bottom: 20},
+var treeMargin = {left: mobileScreen ? 20 : 50, top: mobileScreen ? 75 : 60, right: mobileScreen ? 20 : 50, bottom: 20},
 	treeWidth = Math.min($(".dataresource.treemap.potentie").width(),700) - treeMargin.left - treeMargin.right,
 	treeHeight = mapHeight + 50 - (treeMargin.top - mapMargin.top);
 	
@@ -49,14 +51,15 @@ function drawMap(mapWrapper, colorScale, colorVar, mapTitle, width, height, marg
 	///////////////////// Initiate Map /////////////////////////
 	////////////////////////////////////////////////////////////
 	
-	var mapScale = (width+margin.left+margin.right > 450 ? 5500 : 4500);
-	var mapMove = (width+margin.left+margin.right > 450 ? 50 : 40);
+	var mapScale = (mobileScreen ? 4000 : 5500);
+	var mapMove = (mobileScreen ? 20 : 50);
+	var mapUp = (mobileScreen ? 60 : 30);
 	
 	// new projection
 	var projection = d3.geo.mercator()
 						.center(d3.geo.centroid(gemeentesGeo))
 						.scale(mapScale)
-						.translate([(width/2 + mapMove), (height/2 - 30)]);
+						.translate([(width/2 + mapMove), (height/2 - mapUp)]);
 	var path = d3.geo.path().projection(projection);
 
 	mapWrapper.selectAll("path")
